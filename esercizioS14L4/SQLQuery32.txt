@@ -1,0 +1,48 @@
+CREATE PROCEDURE InserisciImpiegato
+    @Cognome VARCHAR(255),
+    @Nome VARCHAR(255),
+    @CodiceFiscale VARCHAR(16),
+    @Eta INT,
+    @Data_Assunzione DATE,
+    @RedditoMensile DECIMAL(10, 2),
+    @DetrazioneFiscale CHAR(2),
+    @IDImpiego INT
+AS
+BEGIN
+    INSERT INTO IMPIEGATO (Cognome, Nome, CodiceFiscale, Eta, Data_Assunzione, RedditoMensile, DetrazioneFiscale, IDImpiego)
+    VALUES (@Cognome, @Nome, @CodiceFiscale, @Eta, @Data_Assunzione, @RedditoMensile, @DetrazioneFiscale, @IDImpiego);
+END;
+
+
+CREATE PROCEDURE EliminaImpiegato
+    @IDImpiegato INT,
+    @Nome VARCHAR(255),
+    @Cognome VARCHAR(255)
+AS
+BEGIN
+    DELETE FROM IMPIEGATO
+    WHERE IDImpiegato = @IDImpiegato AND Nome = @Nome AND Cognome = @Cognome;
+END;
+
+
+CREATE PROCEDURE AggiornaImpiegato
+    @IDImpiegato INT,
+    @Cognome VARCHAR(255),
+    @Nome VARCHAR(255),
+    @CodiceFiscale VARCHAR(16),
+    @Eta INT,
+    @Data_Assunzione DATETIME,
+    @RedditoMensile DECIMAL(10, 2),
+    @DetrazioneFiscale CHAR(2)
+AS
+BEGIN
+    UPDATE IMPIEGATO
+    SET Cognome = @Cognome,
+        Nome = @Nome,
+        CodiceFiscale = @CodiceFiscale,
+        Eta = @Eta,
+        Data_Assunzione = @Data_Assunzione,
+        RedditoMensile = @RedditoMensile,
+        DetrazioneFiscale = @DetrazioneFiscale
+    WHERE IDImpiegato = @IDImpiegato;
+END;
